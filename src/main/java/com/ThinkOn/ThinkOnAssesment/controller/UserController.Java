@@ -2,6 +2,7 @@ package com.ThinkOn.ThinkOnAssesment.controller;
 
 import com.ThinkOn.ThinkOnAssesment.model.User;
 import com.ThinkOn.ThinkOnAssesment.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class UserController {
 
     // Endpoint to create a new user (POST /users)
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 
@@ -39,7 +40,7 @@ public class UserController {
 
     // Endpoint to update an existing user (PUT /users/{id})
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User updatedUser) {
         return new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
     }
 
