@@ -33,7 +33,6 @@ public class User {
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Phone number must be between 10 and 15 digits and can start with +")
     private String phoneNumber;
 
-    // Constructors
     public User() {}
 
     public User(String username, String firstName, String lastName, String email, String phoneNumber) {
@@ -44,7 +43,6 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

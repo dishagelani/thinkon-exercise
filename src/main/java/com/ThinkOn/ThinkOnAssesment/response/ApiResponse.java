@@ -7,13 +7,11 @@ public class ApiResponse {
     private String message;
     private Object data;
 
-    // Constructor
     public ApiResponse(String message, Object data) {
         this.message = message;
         this.data = data; 
     }
 
-    // Getters
     public String getMessage() {
         return message;
     }

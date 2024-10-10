@@ -38,19 +38,14 @@ public class UserController {
     // Endpoint to get a specific user by ID (GET /users/{id})
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
-        if (user.isPresent()) {
-            ApiResponse response = new ApiResponse("Retrieved user data successfully", user.get());
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ApiResponse response = new ApiResponse("User not found", null);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        }
+        User user = userService.getUserById(id);  // Fixed the method call
+        ApiResponse response = new ApiResponse("Retrieved user data successfully", user);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // Endpoint to update an existing user (PUT /users/{id})
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> updateUser(@Valid  @PathVariable Long id, @RequestBody User updatedUser) {
+    public ResponseEntity<ApiResponse> updateUser(  @PathVariable Long id, @Valid @RequestBody User updatedUser) {
         User user = userService.updateUser(id, updatedUser);
         ApiResponse response = new ApiResponse("Edited user data", user);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -61,6 +56,6 @@ public class UserController {
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         ApiResponse response = new ApiResponse("Deleted user successfully", null);
-        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }  
 }

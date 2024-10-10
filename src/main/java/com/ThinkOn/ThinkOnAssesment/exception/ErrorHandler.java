@@ -14,7 +14,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class ErrorHandler {
 
-
+    // Error handling for validation exceptions
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -32,7 +32,8 @@ public class ErrorHandler {
     // Error handling for other exceptions
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleGenericException(Exception e) {
-        ApiResponse response = new ApiResponse("Something went wrong !", null);
+
+        ApiResponse response = new ApiResponse(e.getMessage(), null);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
